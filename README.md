@@ -1,5 +1,5 @@
 # meeting_18_10
 Presentation meeting
 
-link:
+link:https://luigicesarini.github.io/meeting_18_10/
 
