@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Trends in sub-daily    extreme precipitation events</title>
+    <meta charset="utf-8" />
+    <meta name="author" content=" Luigi Cesarini" />
+    <link href="index_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="index_files/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
+    <link href="index_files/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
+    <script src="index_files/kePrint-0.0.1/kePrint.js"></script>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# <f_title><strong>Trends in sub-daily <br><br> extreme precipitation events</strong></f_title>
+### <f_author> <strong>Luigi Cesarini</strong> </f_author>
+### <f_date>Pavia, 18/10/2019</f_date>
+
+---
+
+
+
+
+
+# Agenda
+&lt;br&gt;&lt;br&gt;  
+
+&lt;ul style="
+    position: fixed;
+"&gt;
+&lt;li&gt;&lt;p style="font-size:26px;font-weight:350;"&gt;Introduction&lt;/p&gt;  
+&lt;/li&gt;
+&lt;li&gt;&lt;p style="font-size:26px;font-weight:350;"&gt;Study area and Data gathering&lt;/p&gt;   
+&lt;/li&gt;
+&lt;li&gt;&lt;p style="font-size:26px;font-weight:350;"&gt;Analysis&lt;/p&gt;     
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;State of the art &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;First Results&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Preliminary results&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Future developments &amp;amp; challenges        &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p style="font-size:26px;font-weight:350;"&gt;Conclusions&lt;/p&gt; 
+&lt;/li&gt;
+&lt;/ul&gt;
+---
+
+# Introduction
+  
+  
+Atmospheric temperature strongly influences the intensity of extreme rainfall, as warmer air is capable of holding more water thatn cooler air, thus being able to provide more moisture to rainfall events.  
+
+The __increase in temperature__ is believed to lead to an __intensification of extreme rainfall__ especially for short duration events.  
+
+Even though short-duration storms are the ones impacted the most few studies have been conducted on sub-daily rainfall, globally and in Italy.  
+
+My research focuses on __trend__ detection in __sub-daily__ precipitation extremes
+
+&lt;img src="graph_anomaly.png" width="70%" style="display: block; margin: auto;" /&gt;
+  
+&lt;p style="line-height:1em;text-align:center;font-size:14px;font-style:italic"&gt; 
+Source: &lt;a href="https://data.giss.nasa.gov/gistemp/graphs_v4/"&gt;https://data.giss.nasa.gov/gistemp/graphs_v4/&lt;/a&gt;
+&lt;/p&gt;
+
+---
+
+# Study area &amp; Data
+  
+&lt;br&gt;  
+Annual maximum series of 1,3,6,12 and 24 hours for 385 stations  
+
+.pull-left[
+__Spatial Availability__  
+
+* Six regions  
+* On average 1 station every 290 `\(km^2\)`
+* Huge gaps in the Po valley 
+&lt;br&gt;
+
+&lt;img src="fig_1.png" alt="" style="padding-top:55px"&gt;  
+
+]  
+
+  
+.pull-right[  
+__Temporal Availability __   
+
+* Decline starting at the beginning of 90's  
+* Problems with continuity in the data
+* Period of observation 1960-2017
+&lt;br&gt;
+
+&lt;img src="fig_2.png" alt="" style="padding-top:55px"&gt;
+]
+
+---
+
+# Study area &amp; Data
+
+After some quality check on the data:
+
+
+* Length of records of at least 30 years
+
+* NA's less that 25%
+
+* At least 5 years of data for each decade  
+
+148 stations spread across northern Italy with  
+&lt;div class="pull-left" style="width: 35%;"&gt;
+.pull-left[
+
+&lt;table class="table table-striped table-hover table-bordered" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;background-color: indianred !important;"&gt; Region &lt;/th&gt;
+   &lt;th style="text-align:right;background-color: indianred !important;"&gt; N° Station &lt;/th&gt;
+   &lt;th style="text-align:right;background-color: indianred !important;"&gt; Avg. km^2 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; EmiliaRomagna &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 45 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 491 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Friuli Venezia Giulia &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 32 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 244 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Lombardia &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2390 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Piemonte &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1581 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Trentino &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 567 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Veneto &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 852 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+]
+&lt;/div&gt;  
+  
+
+
+&lt;img src="fig_stat_res.png" alt="" style="float:right;width:60%;"&gt;
+
+
+
+
+
+
+---
+
+# Trend Analysis
+
+There are two main approaches to trend detection and analysis: 
+
+.pull-left[
+
+ __Parametric__    
+
+
+Fitting of distribution  
+&lt;br&gt;
+* Pro:   
+ + More powerful  
+ + Easy to adopt and provide full description of the population  
+&lt;br&gt;      
+&lt;br&gt;
+* Cons: 
+ + Need of strong hypothesis on the data:  
+        i. Serial independence  
+        ii. Normally distributed  
+        iii. Require bigger sample size
+ + Not capable of handling outliers
+&lt;br&gt;
+
+]
+
+.pull-right[
+__Non-Parametric__  
+
+Use of test (i.e. Mann-Kendall, Spearmon, ITA)  
+
+* Pro:
+  + Handling of non-normal PDFs     
+  + Robust with outliers  
+&lt;br&gt;
+&lt;br&gt;
+
+* Cons:  
+ + Require the data to be independent  
+ + Are more restrictive   
+ + Based on ascending order (loss information)  
+]
+
+
+---
+
+# Trend Analysis
+## Visual check
+
+![](index_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+
+---
+
+# Trend Analysis
+## MK Test &amp; Sen's slope estimator (Mann, 1945; Kendall, 1975)
+&lt;p style="text-align:center;line-height:1em;font-weight:400;"&gt; 
+MK is a Non-parametric test used for detection of monotonic linear trend 
+&lt;/p&gt;  
+
+
++ Serially independent
+
++ Does not require normality assumption 
+
++ Does not give information about the magnitude of the trend  
+
++ Allows the assessment of statistically significant trend
+
+&lt;br&gt;  
+
+&lt;p style="text-align:center;line-height:1.5em;font-weight:400;"&gt; 
+Sen's slope estimator is a non-parametric procedure aimed at assessing the change per unit time when a linear trend is indeed present. 
+&lt;/p&gt; 
+
+
+The linear model `\(f(t)\)`:  
+
+`\begin{align}
+f(t)= Qt + B
+\end{align}`
+
+and the slope Q is given by:  
+
+`\begin{align}
+Q_i = median(\frac{x_j - x_i}{j-i})\text{ for all j &gt; i}
+\end{align}`
+&lt;br&gt;
+
+---
+
+# Trend Analysis
+## MK Test &amp; Sen's slope estimator (Results)
+
+![](index_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+
+---
+
+# Trend Analysis
+## MK Test &amp; Sen's slope estimator (Results)
+&lt;img src="tm_fac_trend.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Trend Analysis
+## MK Test &amp; Sen's slope estimator (Results)
+
+&lt;div class="pull-left" style="width:35%;margin-top:2.5%;"&gt;
+&lt;div class="pull-left" style="width:100%"&gt;&lt;table class="table table-striped table-hover table-bordered" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;background-color: indianred !important;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:left;background-color: indianred !important;"&gt; 10% &lt;/th&gt;
+   &lt;th style="text-align:left;background-color: indianred !important;"&gt; 5% &lt;/th&gt;
+   &lt;th style="text-align:left;background-color: indianred !important;"&gt; 1% &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; +1hr &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 33.11 % &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 25 % &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 13.5 % &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; +3hr &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 30.41 % &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 22.3 % &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 13.5 % &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; +6hr &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 31.76 % &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 23.65 % &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 11.5 % &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; +12hr &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 26.35 % &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 22.3 % &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 10.1 % &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; +24hr &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 18.23 % &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 13.5 % &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 6.08 % &lt;/td&gt;
+  &lt;/tr
+    &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; -1hr &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 4.74 % &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2.71 % &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 0.68 % &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; -3hr &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2.03 % &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 0.68 % &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 0.68 % &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; -6hr &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 4.06 % &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2.03 % &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1.35 % &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; -12hr &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2.03 % &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 0.68 % &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 0 % &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; -24hr &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 5.03 % &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1.35 % &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 0.68 % &lt;/td&gt;
+  &lt;/tr&gt;
+
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+&lt;/div&gt;
+&lt;/div&gt; 
+  
+
+
+&lt;img src="tm_trend_1hr.png" alt="" style="float:right;width:65%;"&gt;
+
+
+---
+
+# Trend Analysis
+## Innovative trend analysis (ITA)  (Şen, 2012)
+  
+* Plot the first half of a time-series vs the second half and plot it against each other on a Cartesian coordinate system.  
+
+* Trend are identified observing the points placing above or below the 1:1 line denoting, respectively, an increasing or a decreasing trend.  
+
+The main __advantages__ of this method resides in:  
+
+.pull-left[
+
+* There is no distinction whether the time series are non-normally distributed, having small sample lengths, or possess serial correlations.  
+* The results can be observed graphically  
+
+* Possibility to investigate and visualize sub-trends allowing us to detect non monotonic trends when within the same time series there are increasing and decreasing trends
+]
+
+--
+
+.pull-right[
+![](https://ars.els-cdn.com/content/image/1-s2.0-S0960148117312569-egi106X2KFJXPS.jpg)
+]
+
+---
+
+# Trend Analysis
+## Innovative trend analysis (ITA)  (Şen, 2012)
+  
+    
+&lt;img src="index_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+
+# Trend Analysis
+## Innovative trend analysis (ITA)  (Şen, 2012)
+  
+Here 3 examples of time series with increasing (blue), decreasing(red) and with no trend (grey) according to the results of the MK test.  
+
+.pull-left[  
+
+__Time series__  
+
+![](index_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+]
+
+--
+
+.pull-right[  
+
+__ITA subset of time series__
+    
+![](index_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+]
+
+---
+
+# Trend Analysis
+## Innovative trend analysis (ITA) Results
+
+&lt;img src="split_ita.png" alt="", style="width:85%;"&gt;
+
+
+---
+
+# Trend Analysis
+## Innovative trend analysis (ITA) Results
+
+&lt;img src="tm_ita_1hr_2.png" width="85%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+
+---
+# Correlation Analysis
+## Relationship between trend and morpological characteristics (Elevation, TWI, Distance from water body)
+
+&lt;br&gt;
+&lt;br&gt;
+
+&lt;img src="tr_el.gif" alt="", style="float:left;width:60%;position:relative;top:10px,"&gt;
+
+&lt;table class="table table-striped table-hover table-bordered" style="font-size: 12px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;background-color: indianred !important;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:right;background-color: indianred !important;"&gt; 1hr &lt;/th&gt;
+   &lt;th style="text-align:right;background-color: indianred !important;"&gt; 3hr &lt;/th&gt;
+   &lt;th style="text-align:right;background-color: indianred !important;"&gt; 6hr &lt;/th&gt;
+   &lt;th style="text-align:right;background-color: indianred !important;"&gt; 12hr &lt;/th&gt;
+   &lt;th style="text-align:right;background-color: indianred !important;"&gt; 24hr &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Cor &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.15 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.11 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.12 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.08 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.06 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Dist. Corr. &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.19 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.14 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.18 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.20 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.18 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; MIC &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.23 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.19 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.25 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.31 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.29 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+
+
+
+---
+# Work in progress   
+## Seasonality 
+
+Date of occurence of every extreme event for each duration.(Only: _Piemonte_ , _Trentino alto Adige_ and _Friuli Venezia Giulia_)  
+
+&lt;img src="seas_10.png" alt="", style="width:100%;position:relative;top:10px,"&gt;
+  
+
+---
+# Work in progress   
+## Seasonality 
+
+
+&lt;img src="grid_10_1.png" alt="", style="width:85%;position:relative;top:10px,"&gt;
+  
+---
+# Work in progress   
+## Seasonality 
+
+
+&lt;img src="grid_10_6.png" alt="", style="width:85%;position:relative;top:10px,"&gt;
+  
+
+---
+# Work in progress   
+## Seasonality 
+
+
+&lt;img src="grid_10_24.png" alt="", style="width:85%;position:relative;top:10px,"&gt;
+
+---
+# Work in progress   
+## Seasonality 
+  
+Looking into a window of 20 years  
+
+
+&lt;img src="seas_20.png" alt="", style="width:100%;position:relative;top:10px,"&gt;
+  
+
+  
+
+---
+# Work in progress   
+## Seasonality 
+
+
+&lt;img src="grid_20_1.png" alt="", style="width:85%;position:relative;top:10px,"&gt;
+  
+---
+# Work in progress   
+## Seasonality 
+
+
+&lt;img src="grid_20_6.png" alt="", style="width:85%;position:relative;top:10px,"&gt;
+  
+
+---
+# Work in progress   
+## Seasonality 
+
+
+&lt;img src="grid_20_24.png" alt="", style="width:85%;position:relative;top:10px,"&gt;
+  
+
+
+
+---
+# Future developments &amp; challenges  
+  
+&lt;br&gt;  
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;  
+
+__Developments__  
+
+* Further investigation of seasonality analysis expanding to the whole area  
+  
+  
+* Analysis of covariates such as temperature  
+  
+  
+* Entering the parametric world  
+  
+  
+   
+
+__Challenges__  
+    
+* Data  
+  
+  
+* Exploring AI techniques applied to trend detection  
+  
+  
+* Bridge between historical data and forecasting
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
