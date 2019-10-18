@@ -75,7 +75,7 @@ df_all <- st_read("G:\\Il mio Drive\\Date_CSV\\shp\\trend_update.gpkg")
 # Introduction
   
   
-Atmospheric temperature strongly influences the intensity of extreme rainfall, as warmer air is capable of holding more water thatn cooler air, thus being able to provide more moisture to rainfall events.  
+Atmospheric temperature strongly influences the intensity of extreme rainfall, as warmer air is capable of holding more water than cooler air, thus being able to provide more moisture to rainfall events.  
 
 The __increase in temperature__ is believed to lead to an __intensification of extreme rainfall__ especially for short duration events.  
 
