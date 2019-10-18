@@ -347,7 +347,7 @@ ggplot(mk_res,aes(as.factor(Duration),y = (..count..)/sum(..count..),fill=Trend)
 
 # Trend Analysis
 ## MK Test & Sen's slope estimator (Results)
-```{r, width=12, height=8, fig.align='center'}
+```{r, width=12, height=7, fig.align='center'}
 knitr::include_graphics('tm_fac_trend.png')
 
 ```
