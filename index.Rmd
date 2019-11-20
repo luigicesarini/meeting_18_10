@@ -1,7 +1,7 @@
 ---
 title: "<f_title>**Trends in sub-daily <br><br> extreme precipitation events**</f_title>"
 author: "<f_author> **Luigi Cesarini** </f_author>"
-date: "<f_date>Pavia, 18/10/2019</f_date>"
+date: "<f_date>Pavia, 20/11/2019</f_date>"
 output:
   xaringan::moon_reader:
     css: [default,metropolis, metropolis-fonts,"style.css"]
@@ -41,7 +41,21 @@ mk_res<- cbind(mk_res,db_all[match(mk_res$Station,db_all$code),c('lat','lon','el
 mk_sf <- st_as_sf(mk_res, coords=c("lon","lat"), crs = 4326)  %>% mutate(Abs.sen=abs(`Sen's slope`))
 df_all <- st_read("G:\\Il mio Drive\\Date_CSV\\shp\\trend_update.gpkg")
 
+load(file="G:\\Il mio Drive\\Date_CSV\\map_veneto.RData")
 
+
+v052 <- data.frame(
+                  "Source"=c("Ceolati","Valli del Pasubio","ERA-5"),
+                  "1hr"=c(27.4,24.2,6.5),
+                  "date"=c("11 Aug","12 Aug",NA),
+                   "3hr"=c(56.6,50.6,16.5),
+                  "date"=c("11-12 Aug","12 Aug",NA),
+                  "6hr" =c(84.8,75.2,27.5),
+                  "date"=c("11-12 Aug","12 Aug",NA),
+                  "12hr"=c(113.8,107.8,44.3),
+                  "date"=c("17 Oct","17 Oct",NA),
+                  "24hr"=c(157.8,153.2,64),
+                  "date"=c("17-18 Oct","17 Oct",NA))
 ```
 
 # Agenda
@@ -53,6 +67,8 @@ df_all <- st_read("G:\\Il mio Drive\\Date_CSV\\shp\\trend_update.gpkg")
 <li><p style="font-size:26px;font-weight:350;">Introduction</p>  
 </li>
 <li><p style="font-size:26px;font-weight:350;">Study area and Data gathering</p>   
+</li>
+<li><p style="font-size:26px;font-weight:350;">Brief discussion of Block Maxima approach and its use related to rainfall</p>   
 </li>
 <li><p style="font-size:26px;font-weight:350;">Analysis</p>     
 
@@ -77,7 +93,7 @@ df_all <- st_read("G:\\Il mio Drive\\Date_CSV\\shp\\trend_update.gpkg")
   
 Atmospheric temperature strongly influences the intensity of extreme rainfall, as warmer air is capable of holding more water than cooler air, thus being able to provide more moisture to rainfall events.  
 
-The __increase in temperature__ is believed to lead to an __intensification of extreme rainfall__ especially for short duration events.  
+The __increase in temperature__ is believed to lead to an __intensification of extreme rainfall__ especially for short duration events (Westra et al. 2014).  
 
 Even though short-duration storms are the ones impacted the most few studies have been conducted on sub-daily rainfall, globally and in Italy.  
 
@@ -158,9 +174,51 @@ kable(mk_res %>% filter(Duration == 3) %>% group_by(region) %>% dplyr::summarise
 <img src="fig_stat_res.png" alt="" style="float:right;width:60%;">
 
 
+---
+
+# Extreme value theory
+## Block Maxima and its application with rainfall
+
+
+The BMS approach consists of dividing the period of observation into equal time
+interval that do not overlap with each other, and keep only the maximum value for
+each time step created 
 
 
 
+<img src="ams.png" alt=""  style="width:80%;align:middle;">
+
+
+
+---
+
+# Spatial variability in precipitation
+
+
+```{r}
+
+kable(v052, format = "html",
+      col.names = c("Source","1hr","Date", "3hr","Date","6hr","Date", "12hr","Date", "24hr","Date")) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover","bordered"),font_size = 12) %>% 
+  row_spec(0, background = "indianred")
+
+```
+
+<div id="htmlwidget-bbf55593a0a1c1fb1e69" style="width: 820px; height: 400px; position: relative; outline: none;" class="leaflet html-widget html-widget-static-bound leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
+
+```{r, echo=FALSE, fig.width=3,fig.height=2}
+
+tmap_mode("view")
+
+tm_shape(st_make_grid(era_cr$X1996.01.01.00.00.00),bbox = st_bbox(c(xmin=10.6,xmax=13.20,ymin=44.7,ymax=46.7),crs=st_crs(4326)))+
+  tm_borders(lwd = 3)+
+  tm_shape(nord %>% filter(NAME_1 == "Veneto"))+tm_borders()+
+  tm_shape(inter_buffer_ven %>% filter(code == "V052"))+tm_markers(clustering = FALSE)+
+  tm_shape(pt_st_ven)+tm_dots(col='red',size=.5)+
+  tm_scale_bar()
+
+```
+</div>
 
 ---
 
